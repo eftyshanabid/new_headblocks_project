@@ -64,5 +64,32 @@ async function deleteWebsite(req,res) {
 }
 }
 
+async function updateWebsite(req,res){
+    try{
+        const id = req.params.id;
+        const {name:name,url:url,type_id:type_no,status:status,is_active:is_active} = req.body;
+        
+        const website = await Website.findByPk(id);
+        if(!website){
+            return res.status(404).json({msg:"website not found"})
+        }
+        website.name = name;
+        website.url = url;
+        website.type_id = type_no;
+        website.status = status;
+        website.is_active = is_active;
+        await website.save();
+        res.status(200).json(website);
+    }catch(error){
+        if(error instanceof ForeignKeyConstraintError){
+            res.status(404).json({
+                msg:"typeno does not exist"
+            })
+        }
+        console.log(error);
+        res.status(500).json({ error: 'Failed to update website' });
+    }
+}
 
-module.exports = {createWebsite,getallWebsites,getWebsiteById,deleteWebsite};
+
+module.exports = {createWebsite,getallWebsites,getWebsiteById,deleteWebsite,updateWebsite};
