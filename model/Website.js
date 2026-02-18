@@ -30,12 +30,4 @@ const Website = sequelize.define('Website',{
 
 })
 
-Website.sync()
-  .then(() => {
-    console.log('Website table created successfully.');
-  })
-  .catch((err) => {
-    console.error('Unable to create Website table:', err);
-  });
-
 module.exports = Website;

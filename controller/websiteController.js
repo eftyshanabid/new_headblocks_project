@@ -3,13 +3,13 @@ const { ForeignKeyConstraintError } = require('sequelize');
 async function createWebsite(req, res) {
     try {
         // const {name,url,type_id,status,is_active} = req.body;
-        const name = req.body.name;
+        const my_name = req.body.name;
         const url = req.body.url;
-        const type_no = req.body.type_no;
+        const type_id = req.body.type_no;
         const status = req.body.status;
         const is_active = req.body.is_active;
 
-        const website = await Website.create({name,url,type_id:type_no,status,is_active});
+        const website = await Website.create({name:my_name,url,type_id,status,is_active});
         res.status(201).json(website);
     } catch (error) {
         if(error instanceof ForeignKeyConstraintError){
@@ -17,7 +17,7 @@ async function createWebsite(req, res) {
                 msg:"typeno does not exist"
             })
         }
-        res.status(500).json({ error: 'Failed to create website' });
+        res.status(500).json({ error: error });
   
   }
 }
@@ -67,7 +67,7 @@ async function deleteWebsite(req,res) {
 async function updateWebsite(req,res){
     try{
         const id = req.params.id;
-        const {name:name,url:url,type_id:type_no,status:status,is_active:is_active} = req.body;
+        const {name:name,url:url,status:status,is_active:is_active} = req.body;
         
         const website = await Website.findByPk(id);
         if(!website){
@@ -75,7 +75,6 @@ async function updateWebsite(req,res){
         }
         website.name = name;
         website.url = url;
-        website.type_id = type_no;
         website.status = status;
         website.is_active = is_active;
         await website.save();
@@ -87,9 +86,23 @@ async function updateWebsite(req,res){
             })
         }
         console.log(error);
-        res.status(500).json({ error: 'Failed to update website' });
+        res.status(500).json({ error: error });
+    }
+}
+
+async function getwebsiteByName(req,res){
+    try{
+        const name = req.params.name;
+        const website = await Website.findOne({where:{name:name}});
+        if(!website){
+            return res.status(404).json({msg:"website not found"})
+        }
+        res.status(200).json(website);
+    }catch(error){
+        console.log(error);
+        res.status(500).json({ error: 'Failed to retrieve website' });
     }
 }
 
 
-module.exports = {createWebsite,getallWebsites,getWebsiteById,deleteWebsite,updateWebsite};
+module.exports = {createWebsite,getallWebsites,getWebsiteById,deleteWebsite,updateWebsite,getwebsiteByName};

@@ -11,12 +11,4 @@ const Type = sequelize.define('Type',{
       allowNull:false }
 })
 
-Type.sync()
-  .then(() => {
-    console.log('Type table created successfully.');
-    })
-    .catch((err) => {
-    console.error('Unable to create Type table:', err);
-    });
-
 module.exports = Type;
