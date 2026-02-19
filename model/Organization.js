@@ -1,7 +1,7 @@
 const { DataTypes} = require('sequelize');
 const sequelize = require('../config/database');
 
-const Org = sequelize.define('Organization',{
+const organization = sequelize.define('Organization',{
     name:{
         type:DataTypes.STRING,
         allowNull:false
@@ -23,11 +23,11 @@ const Org = sequelize.define('Organization',{
     }
 })
 
-Org.sync().then(()=>{
+organization.sync().then(()=>{
     console.log("Organization table created successfully")
 })
 .catch((err)=>{
-    confirm.log(err)
+    console.log(err)
 })
 
-module.exports = Org;
+module.exports = organization;

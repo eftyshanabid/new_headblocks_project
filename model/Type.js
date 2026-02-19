@@ -1,14 +1,24 @@
-const Sequelize = require("sequelize");
+const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
-const Type = sequelize.define('Type',{
+const type = sequelize.define('Type',{
      name:{
-      type:Sequelize.DataTypes.STRING,
+      type:DataTypes.STRING,
       allowNull:false
     },
     status:{
-      type:Sequelize.DataTypes.STRING,
+      type:DataTypes.STRING,
       allowNull:false }
 })
 
-module.exports = Type;
+type.sync()
+.then(()=>{
+  console.log("type table created successfully");
+})
+.catch((err)=>{
+  {
+    console.log("error creating type table",err)
+  }
+})
+
+module.exports = type;

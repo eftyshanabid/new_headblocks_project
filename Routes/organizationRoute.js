@@ -1,6 +1,6 @@
 const express = require('express');
-const { createOrg, getallorg, deleteOrg } = require('../controller/organizationController');
 const router = express.Router();
+const { createOrg, getallorg, deleteOrg } = require('../controller/organizationController');
 
 router.post('/create',createOrg);
 router.get('/getOrg',getallorg);

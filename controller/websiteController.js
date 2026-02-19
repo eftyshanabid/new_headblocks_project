@@ -1,5 +1,7 @@
-const Website = require('../model/Website');
 const { ForeignKeyConstraintError } = require('sequelize');
+const Website = require('../model/Website');
+
+
 async function createWebsite(req, res) {
     try {
         // const {name,url,type_id,status,is_active} = req.body;

@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const {createType,updateTable,deleteType,getAllTypes,getTypeById,typeList} = require('../controller/typeController');
 
+router.post('/create', createType);
+
 
 router.post('/create', createType);
 router.put('/update/:id',updateTable);

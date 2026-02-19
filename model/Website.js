@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const sequelize = require("../config/database");
 
 
-const Website = sequelize.define('Website',{
+const website = sequelize.define('Website',{
     name:{
         type:Sequelize.DataTypes.STRING,
         allowNull:false
@@ -30,4 +30,12 @@ const Website = sequelize.define('Website',{
 
 })
 
-module.exports = Website;
+website.sync()
+.then(()=>{
+    console.log("website table created successfully");
+})
+.catch((err)=>{
+    console.log("error creating website table",err)
+})
+
+module.exports = website;

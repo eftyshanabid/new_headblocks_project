@@ -1,9 +1,9 @@
-const Project = require('../model/Project');
+const Project = require("../model/Project");
 
 async function createProject(req, res) {
     try {
         const { name, status, budget, tier, org_id } = req.body;
-        const newProj = await Project.create(name, status, budget, tier, org_id);
+        const newProj = await Project.create({name, status, budget, tier, org_id});
         res.status(201).json({
             msg: "msg created successfully",
             data: newProj

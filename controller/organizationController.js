@@ -1,14 +1,15 @@
-const Organization = require('../model/Organization');
+const Organization = require("../model/Organization");
 
 async function createOrg(req,res) {
     try{
     const {name,website_id,contact,address} = req.body;
 
-    const newOrg = await Organization.create(name,website_id,contact,address);
+    const newOrg = await Organization.create({name,website_id,contact,address});
     res.status(201).json({
         msg: "Organization has been created successfully",
         data: newOrg
     })
+    
     }
     catch(err){
         console.log(err);

@@ -1,8 +1,7 @@
 const Type = require("../model/Type");
-const { get } = require("../Routes/websiteRoute");
+
 async function createType(req, res) {
     try {
-        // const { name, status} = req.body;
         const{name:name,status:status} = req.body;
         const type = await Type.create({ name, status });
         res.status(201).json(type);

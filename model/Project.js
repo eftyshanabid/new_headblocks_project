@@ -1,7 +1,7 @@
-const { DataTypes, INTEGER } = require('sequelize');
+const { DataTypes} = require('sequelize');
 const sequelize = require('../config/database');
 
-const Project = sequelize.define('Project',{
+const project = sequelize.define('Project',{
     name:{
         type:DataTypes.STRING,
         allowNull:false
@@ -16,11 +16,11 @@ const Project = sequelize.define('Project',{
         allowNull:false
     },
     tier:{
-        type:INTEGER,
+        type:DataTypes.INTEGER,
         allowNull:false
     },
     org_id:{
-       type:INTEGER,
+       type:DataTypes.INTEGER,
         references:{
             model:"Organizations",
             key: "id"
@@ -28,4 +28,12 @@ const Project = sequelize.define('Project',{
     }
 })
 
-module.exports = Project;
+project.sync()
+.then(()=>{
+    console.log("project table created successfully");
+})
+.catch((err)=>{
+    console.log("error creating project table",err)
+})
+
+module.exports = project;
