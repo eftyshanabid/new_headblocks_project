@@ -2,6 +2,30 @@ const express = require('express');
 const router = express.Router();
 const {createType,updateTable,deleteType,getAllTypes,getTypeById,typeList} = require('../controller/typeController');
 
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Type:
+ *      type: object
+ *      properties:
+ *          id:
+ *            type: integer
+ *          name:
+ *            type: string
+ *          status:
+ *            type: string
+ *          createdAt:
+ *            type: string
+ *            format: date-time
+ *          updatedAt:
+ *            type: string
+ *            format: date-time
+ *          
+ *        
+ */
+
+
 
 /**
  * @swagger
@@ -110,22 +134,8 @@ router.delete('/delete/:id',deleteType);
  *      description: List of types
  *      content:
  *        application/json:
- *          example:
- *            - id: 3
- *              name: Electronics
- *              status: Active
- *              createdAt: "2026-02-21T18:58:11.208Z"
- *              updatedAt: "2026-02-21T18:58:11.208Z"
- *            - id: 4
- *              name: Electronics
- *              status: Active
- *              createdAt: "2026-02-21T19:02:12.865Z"
- *              updatedAt: "2026-02-21T19:02:12.865Z"
- *            - id: 1
- *              name: Facebook
- *              status: Running
- *              createdAt: "2026-02-18T09:38:34.525Z"
- *              updatedAt: "2026-02-21T23:10:53.645Z"
+ *          schema:
+ *            $ref: '#/components/schemas/Type'
  * 
  *              
  *    
